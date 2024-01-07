@@ -47,7 +47,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns : 5% 95%;
   align-items : center;
-  // background-color : #080420;
+  background-color :#0d180e;
   padding : 0 2rem;
   padding-bottom : .3rem;
   .button-container {
@@ -58,7 +58,8 @@ const Container = styled.div`
     .emoji {
       position: relative;
       svg {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        padding-right : .6rem;
         color: #ffff00c8;
         cursor: pointer;
       }
@@ -89,14 +90,15 @@ const Container = styled.div`
   }
   .input-container{
     width : 100%;
-    border-radius : 2rem;
+    border-radius : 1rem;
     display : flex;
     align-items : center; 
     gap :2rem;
-    background-color : #ffffff34;
+    height : 3rem;
+    background-color : #ffffff10;
     input{
       width : 90%;
-      height : 60%;
+      height : 80%;
       background-color : transparent;
       color: white;
       border : none;
@@ -119,8 +121,9 @@ const Container = styled.div`
       background-color : #9a86f3;
       border:none;
       svg{
-          font-size : 1.5rem;
+          font-size : 1.8rem;
           color : white;
+          width : 1.3rem;
       }
     }
   }

@@ -59,7 +59,7 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts = {contacts} currentUser = {currentUser} changeChat = {handleChatChange}/>
+        <Contacts contacts = {contacts} currentUser = {currentUser} changeChat = {handleChatChange} socket = {socket}/>
         {
           isLoaded && currentChat === undefined ? <Welcome currentUser = {currentUser}/> : <ChatContainer currentChat = {currentChat} currentUser={currentUser} socket = {socket}/>
         }
@@ -76,11 +76,11 @@ const Container = styled.div`
   justify-content : center;
   gap : 1rem;
   align-items : center;
-  background-color : #0b311a;
+  background-color :#071c10;
   .container{
-    height : 85vh;
+    height : 90vh;
     width : 85vw;
-    background: #00000076;
+    background: #00000071;
     border-radius : 2rem;
     display : grid;
     grid-template-columns : 25% 75%;

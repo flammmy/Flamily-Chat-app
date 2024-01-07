@@ -80,7 +80,7 @@ function Register() {
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>whishpR</h1>
+            <h1>flamily</h1>
           </div>
           <input
             type="text"
@@ -123,7 +123,7 @@ const FormContainer = styled.div`
   justify-content : center;
   gap : 1rem;
   align-items : center;
-  background-color : #0b311a;
+  background-color : #071c10;
   .brand{
     display : flex;
     align-items : center;
@@ -145,6 +145,7 @@ const FormContainer = styled.div`
     background-color : #080505;
     border-radius : 2rem;
     padding : 3rem 5rem;
+    box-shadow : 0 4px 20px 4px #140505b8;
     input{
       background : transparent;
       padding : 1rem;
