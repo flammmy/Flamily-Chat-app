@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import Logout from "./Logout";
-function Contacts({ contacts, currentUser, changeChat }) {
+function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue}) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, SetCurrentSelected] = useState(undefined);
+  const [onlineUsers, setOnlineUsers] = useState([]);
 
   useEffect(() => {
     if (currentUser) {
@@ -17,7 +18,16 @@ function Contacts({ contacts, currentUser, changeChat }) {
     SetCurrentSelected(index);
     changeChat(contact);
   };
-
+  useEffect(()=>{
+    if(socket.current){
+      socket.current.on("user-online",(userId) =>{
+        setOnlineUsers((prev) => [...prev,userId]);
+      })
+      socket.current.on("user-offline",(userId) =>{
+        setOnlineUsers((prev) => (prev.filter(user => user != userId)));
+      })
+    }
+  },[socket.current])
   return (
     <>
       {currentUserImage && currentUserName && (
@@ -45,6 +55,10 @@ function Contacts({ contacts, currentUser, changeChat }) {
                   <div className="username">
                     <h3>{contact.username}</h3>
                   </div>
+                  {
+                    
+                    onlineUsers.includes(contact._id)?<div className="online"></div>:<div className="offline"></div>
+                  }
                 </div>
               );
             })}
@@ -59,7 +73,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
-            <Logout />
+            <Logout setDialogue = {setDialogue}/>
           </div>
         </Container>
       )}
@@ -126,6 +140,23 @@ const Container = styled.div`
 
           color: white;
         }
+      }
+      .online{
+        height : 6px;
+        width : 6px;
+        border-radius : 50%;
+        background-color : green;
+        box-shadow: 0 0rem 1rem 3px green;
+        opacity :.7;
+      }
+      .offline{
+        height : 6px;
+        width : 6px;
+        border-radius : 50%;
+        background-color : red;
+        box-shadow: 0 0rem 1rem 3px red;
+        opacity :.7;
+
       }
     }
     .selected {

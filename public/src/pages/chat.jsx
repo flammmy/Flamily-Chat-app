@@ -1,12 +1,13 @@
 import React,{useState,useEffect,useRef} from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import {useNavigate, useNegative} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { allUsersRoutes ,host} from '../utils/APIRoutes';
 import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
 import ChatContainer from '../components/ChatContainer';
 import {io} from "socket.io-client";
+import LogoutDialogue from '../components/LogoutDialogue';
 
 function Chat() {
   const socket = useRef();
@@ -15,6 +16,8 @@ function Chat() {
   const[currentUser,setCurrentUser] = useState(undefined);
   const[currentChat,setCurrentChat] = useState(undefined);
   const[isLoaded,setIsLoaded] = useState(false);
+  const [dialogue,setDialogue] = useState(false);
+
   
   useEffect(() => {
     const fetchData = async () =>{
@@ -59,9 +62,10 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts = {contacts} currentUser = {currentUser} changeChat = {handleChatChange} socket = {socket}/>
+        <Contacts contacts = {contacts} currentUser = {currentUser} changeChat = {handleChatChange} socket = {socket} setDialogue={setDialogue}/>
         {
-          isLoaded && currentChat === undefined ? <Welcome currentUser = {currentUser}/> : <ChatContainer currentChat = {currentChat} currentUser={currentUser} socket = {socket}/>
+          dialogue ? <LogoutDialogue setDialogue={setDialogue}/> :
+          isLoaded && currentChat === undefined ? <Welcome currentUser = {currentUser} setDialogue={setDialogue}/> : <ChatContainer currentChat = {currentChat} currentUser={currentUser} socket = {socket}/>
         }
         
       </div>
@@ -84,9 +88,10 @@ const Container = styled.div`
     border-radius : 2rem;
     display : grid;
     grid-template-columns : 25% 75%;
-    @media screen and (min-width : 720px) and (max-width : 1080){
-      grid-template-columns : 35% 65%;
+    @media screen and (min-width : 600px) and (max-width : 1080px){
+      grid-template-columns : 45% 55%;
     }
   }  
+ 
 `;
 export default Chat

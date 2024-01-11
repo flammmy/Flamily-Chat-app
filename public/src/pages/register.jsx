@@ -123,7 +123,7 @@ const FormContainer = styled.div`
   justify-content : center;
   gap : 1rem;
   align-items : center;
-  background-color : #071c10;
+  background-color :  #092a16;
   .brand{
     display : flex;
     align-items : center;
@@ -142,7 +142,7 @@ const FormContainer = styled.div`
     display : flex;
     flex-direction : column;
     gap : 2rem;
-    background-color : #080505;
+    background-color : #08050542;
     border-radius : 2rem;
     padding : 3rem 5rem;
     box-shadow : 0 4px 20px 4px #140505b8;
@@ -172,6 +172,7 @@ const FormContainer = styled.div`
       font-weight : bold;
       &:hover{
         background-color : #2a410b;
+        box-shadow : 0 4px 20px 4px  #092a16;
       }
     }
     span{

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Picker from 'emoji-picker-react';
 import {IoMdSend} from 'react-icons/io';
 import {BsEmojiSmileFill} from 'react-icons/bs';
-function InputChat({handleSendMsg}) {
+import LogoutDialogue from './LogoutDialogue';
+function InputChat({handleSendMsg,setDialogue}) {
   const [showEmojiPicker,setShowEmojiPicker] = useState(false);
   const [msg,setMsg] = useState("");
 

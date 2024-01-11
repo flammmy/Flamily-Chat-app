@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import {BiPowerOff} from 'react-icons/bi';
 import axios from 'axios';
 import styled from 'styled-components';
-function Logout() {
+function Logout({setDialogue}) {
     const navigate = useNavigate();
-    const handleClick = async () =>{
-        localStorage.clear();
-        navigate("/login");
+    const handleClick = () =>{
+        setDialogue(true);
+        
     }
   return (
     <Button onClick = {handleClick}>
