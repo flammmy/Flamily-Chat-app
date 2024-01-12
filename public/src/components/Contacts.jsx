@@ -24,7 +24,7 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue}) {
         setOnlineUsers((prev) => [...prev,userId]);
       })
       socket.current.on("user-offline",(userId) =>{
-        setOnlineUsers((prev) => (prev.filter(user => user != userId)));
+        setOnlineUsers((prev) => (prev.filter(user => user !== userId)));
       })
     }
   },[socket.current])
