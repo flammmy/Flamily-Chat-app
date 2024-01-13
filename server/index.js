@@ -19,9 +19,6 @@ app.use(express.json());
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messagesRoutes);
 
-app.get("/log" ,(req,res)=>{
-  res.send("hey")
-})
 
 ;(async () => {
   try {
