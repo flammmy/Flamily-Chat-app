@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import Logout from "./Logout";
-function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue}) {
+function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggleContacts}) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, SetCurrentSelected] = useState(undefined);
@@ -17,6 +17,8 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue}) {
   const changeCurrentChat = (index, contact) => {
     SetCurrentSelected(index);
     changeChat(contact);
+    toggleContacts();
+    
   };
   useEffect(()=>{
     if(socket.current){
@@ -119,7 +121,7 @@ const Container = styled.div`
       }
     }
     .contact {
-      border: 0.5px solid #ffffff14;
+      border: 0.5px solid #ffffff30;
       min-height: 3rem;
       width: 85%;
       cursor: pointer;
