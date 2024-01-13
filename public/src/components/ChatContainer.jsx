@@ -55,7 +55,7 @@ function ChatContainer({ currentChat, currentUser, socket}) {
   }, [arrivalMessage]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    scrollRef.current?.scrollIntoView();
   }, [messages]);
 
   return (
