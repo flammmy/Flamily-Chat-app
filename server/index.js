@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const messagesRoutes = require("./routes/messagesRoutes");
 const socket = require("socket.io");
-const { on } = require("./model/messageModel");
 const app = express();
 
 
@@ -38,12 +37,12 @@ app.use("/api/messages", messagesRoutes);
 
 
 
-const server = app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT | 8000, () => {
   console.log(`Server running on port ${process.env.PORT}`);
 });
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "process.env.SOCKET_ORIGIN",
     credentials: true,
   },
 });
