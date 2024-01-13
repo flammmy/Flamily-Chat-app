@@ -1,4 +1,4 @@
-export const host = "flamily-chat-app.vercel.app";
+export const host = "https://flamily-chat-app.vercel.app";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const setAvatarRoute = `${host}/api/auth/setavatar`;
