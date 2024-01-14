@@ -34,9 +34,11 @@ function Chat() {
 
   useEffect(() => {
     if (currentUser) {
-      socket.current = io(wss://https://flamily-chat-app.vercel.app, {
+      socket.current = io(https://flamily-chat-app.vercel.app, {
         reconnection: true,
-        transports: ["websocket"],
+        transports: ["websocket","polling"],
+        withCredentials : true
+  
       });
       socket.current.emit("add-user", currentUser._id);
     }
