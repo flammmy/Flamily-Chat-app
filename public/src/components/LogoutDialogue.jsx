@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 function LogoutDialogue({ setDialogue }) {
   const navigate = useNavigate();
   const logout = () => {
@@ -29,8 +30,7 @@ function LogoutDialogue({ setDialogue }) {
 }
 
 const Container = styled.div`
-  width: 100%;
-  height: 100%;
+
   display: flex;
   justify-content: center;
   align-items: center;

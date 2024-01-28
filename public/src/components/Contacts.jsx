@@ -2,11 +2,24 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import logo from "../assets/logo.svg";
 import Logout from "./Logout";
-function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggleContacts}) {
+import Loader from "./Loading";
+function Contacts({
+  contacts,
+  currentUser,
+  changeChat,
+  socket,
+  setDialogue,
+  toggleContacts,
+  setContactLoaded,
+  contactLoaded,
+  setMessages
+}) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, SetCurrentSelected] = useState(undefined);
   const [onlineUsers, setOnlineUsers] = useState([]);
+
+
 
   useEffect(() => {
     if (currentUser) {
@@ -18,18 +31,17 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggle
     SetCurrentSelected(index);
     changeChat(contact);
     toggleContacts();
-    
   };
-  useEffect(()=>{
-    if(socket.current){
-      socket.current.on("user-online",(userId) =>{
-        setOnlineUsers((prev) => [...prev,userId]);
-      })
-      socket.current.on("user-offline",(userId) =>{
-        setOnlineUsers((prev) => (prev.filter(user => user !== userId)));
-      })
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("user-online", (userId) => {
+        setOnlineUsers((prev) => [...prev, userId]);
+      });
+      socket.current.on("user-offline", (userId) => {
+        setOnlineUsers((prev) => prev.filter((user) => user !== userId));
+      });
     }
-  },[socket.current])
+  }, [socket.current]);
   return (
     <>
       {currentUserImage && currentUserName && (
@@ -38,33 +50,38 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggle
             <img src={logo} alt="logo" />
             <h3>flamily</h3>
           </div>
-          <div className="contacts">
-            {contacts.map((contact, index) => {
-              return (
-                <div
-                  className={`contact ${
-                    index === currentSelected ? "selected" : ""
-                  }`}
-                  onClick={() => changeCurrentChat(index, contact)}
-                  key={index}
-                >
-                  <div className="avatar">
-                    <img
-                      src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                      alt="avatar"
-                    />
+          {!contactLoaded ? (
+            <Loader />
+          ) : (
+            <div className="contacts">
+              {contacts.map((contact, index) => {
+                return (
+                  <div
+                    className={`contact ${
+                      index === currentSelected ? "selected" : ""
+                    }`}
+                    onClick={() => changeCurrentChat(index, contact)}
+                    key={index}
+                  >
+                    <div className="avatar">
+                      <img
+                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                        alt="avatar"
+                      />
+                    </div>
+                    <div className="username">
+                      <h3>{contact.username}</h3>
+                    </div>
+                    {onlineUsers.includes(contact._id) ? (
+                      <div className="online"></div>
+                    ) : (
+                      <div className="offline"></div>
+                    )}
                   </div>
-                  <div className="username">
-                    <h3>{contact.username}</h3>
-                  </div>
-                  {
-                    
-                    onlineUsers.includes(contact._id)?<div className="online"></div>:<div className="offline"></div>
-                  }
-                </div>
-              );
-            })}
-          </div>
+                );
+              })}
+            </div>
+          )}
           <div className="current-user">
             <div className="avatar">
               <img
@@ -75,7 +92,7 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggle
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
-            <Logout setDialogue = {setDialogue}/>
+            <Logout setDialogue={setDialogue} />
           </div>
         </Container>
       )}
@@ -83,12 +100,15 @@ function Contacts({ contacts, currentUser, changeChat,socket ,setDialogue,toggle
   );
 }
 const Container = styled.div`
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
   display: grid;
   grid-template-rows: 10% 78% 12%;
   overflow: hidden;
-  background-color: #0a230e;
+  background: linear-gradient(
+    90deg,
+    rgba(191, 40, 167, 1) 0%,
+    rgb(161 74 146 / 99%) 81%
+  );
+
   .brand {
     display: flex;
     justify-content: center;
@@ -100,12 +120,10 @@ const Container = styled.div`
     h3 {
       color: white;
       font-weight: 700;
-
-      text-transform: uppercase;
     }
   }
   .contacts {
-    padding-top : 1rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
     display: flex;
     flex-direction: column;
@@ -143,33 +161,32 @@ const Container = styled.div`
           color: white;
         }
       }
-      .online{
-        height : 6px;
-        width : 6px;
-        border-radius : 50%;
-        background-color : green;
+      .online {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        background-color: green;
         box-shadow: 0 0rem 1rem 3px green;
-        opacity :.7;
+        opacity: 0.7;
       }
-      .offline{
-        height : 6px;
-        width : 6px;
-        border-radius : 50%;
-        background-color : red;
+      .offline {
+        height: 6px;
+        width: 6px;
+        border-radius: 50%;
+        background-color: red;
         box-shadow: 0 0rem 1rem 3px red;
-        opacity :.7;
-
+        opacity: 0.7;
       }
     }
     .selected {
-      border: 0.5px solid #ffffff70;
-      background-color: #0d1e09;
+      border: 0.5px solid #00000050;
+      background-color: #992086;
     }
   }
   .current-user {
     background-color: #00000050;
     display: flex;
-    justify-content : center;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
     .avatar {
@@ -180,7 +197,7 @@ const Container = styled.div`
     }
     .username {
       h2 {
-        font-weight : 400;
+        font-weight: 400;
         color: white;
       }
     }

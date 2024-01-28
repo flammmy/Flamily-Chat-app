@@ -6,19 +6,21 @@ const userRoutes = require("./routes/userRoutes");
 const messagesRoutes = require("./routes/messagesRoutes");
 const {Server} = require("socket.io");
 const app = express();
-
+const fs = require('fs');
 const http = require('http');
-const server = http.createServer(app);
-
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
 
-
+const options = {
+  key : fs.readFileSync(path.join(__dirname,'cert','key.pem')),
+  cert : fs.readFileSync(path.join(__dirname,'cert','cert.pem'))
+}
+const server = http.createServer(options,app);
 
 app.use("/api/auth", userRoutes);
 app.use("/api/messages", messagesRoutes);
-
 
 ;(async () => {
   try {

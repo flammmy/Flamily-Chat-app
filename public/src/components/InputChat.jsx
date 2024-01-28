@@ -23,6 +23,9 @@ function InputChat({handleSendMsg,setDialogue}) {
       handleSendMsg(msg);
       setMsg("");
     }
+    setShowEmojiPicker(!showEmojiPicker);
+
+
   }
   return (
     <Container>
@@ -48,7 +51,6 @@ const Container = styled.div`
   display: grid;
   grid-template-columns : 5% 95%;
   align-items : center;
-  background-color :#0d180e;
   padding : 0 2rem;
   padding-bottom : .3rem;
   .button-container {
@@ -58,21 +60,24 @@ const Container = styled.div`
     gap: 1rem;
     .emoji {
       position: relative;
+      @media screen and (max-width : 420px){
+        position : absolute;
+        left : 0;
+      }
       svg {
         font-size: 2.5rem;
-        padding-right : .6rem;
         color: #ffff00c8;
         cursor: pointer;
       }
       .EmojiPickerReact{
         position: absolute;
         top: -350px;
-        background-color : #080420;
+        background-color : #65215d;
         // box-shadow : 0 5px 10px #9a86f3;
         border-color : #9186f3; 
 
         .epr-body::-webkit-scrollbar{
-            background-color : #080420;
+            background-color : transparent;
             width : 5px;
             &-thumb{
               background-color : #9a86f3;
@@ -80,7 +85,8 @@ const Container = styled.div`
         }
    
         li.epr-emoji-category>.epr-emoji-category-label{
-          background-color : #080420;
+          background-color : #65215d;
+          outline : 2px solid #65215d;
         }
         .epr-search-container input.epr-search{
           background-color : transparent;
@@ -97,6 +103,7 @@ const Container = styled.div`
     gap :2rem;
     height : 3rem;
     background-color : #ffffff10;
+    border:1px solid white;
     input{
       width : 90%;
       height : 80%;
@@ -111,6 +118,9 @@ const Container = styled.div`
       &:focus{
         outline : none;
 
+      }
+      &::placeholder{
+        color : white;
       }
     }
     button{

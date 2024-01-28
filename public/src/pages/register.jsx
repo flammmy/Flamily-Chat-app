@@ -79,7 +79,7 @@ function Register() {
       <FormContainer>
         <form onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <img src={Logo} alt="Logo" />
+            {/* <img src={Logo} alt="Logo" /> */}
             <h1>flamily</h1>
           </div>
           <input
@@ -123,7 +123,7 @@ const FormContainer = styled.div`
   justify-content : center;
   gap : 1rem;
   align-items : center;
-  background-color :  #092a16;
+  background: linear-gradient(90deg, rgba(191,40,167,1) 0%, rgba(240,237,229,0.9920343137254902) 81%);
   .brand{
     display : flex;
     align-items : center;
@@ -134,50 +134,53 @@ const FormContainer = styled.div`
       height : 5rem;
     }
     h1{
-      color : white;
-      text-transform : uppercase;
+      color : #000000ad;
     }
   }  
   form{
     display : flex;
     flex-direction : column;
     gap : 2rem;
-    background-color : #08050542;
+    background-color : #fff7f745;
     border-radius : 2rem;
     padding : 3rem 5rem;
-    box-shadow : 0 4px 20px 4px #140505b8;
+    border: 1px solid #992086;
     input{
-      background : transparent;
+      background : white;
       padding : 1rem;
-      border : .1rem solid #206d2a;
-      border-radius : .4rem;
+      border : none;
+      border-radius : 2rem;
       color : white;
       width : 100%;
       font-size : 1rem;
+      box-shadow : 0 0 9px 1px #00000024;
       &:focus{
-        border : 0.1rem solid #6d501a;
+        border : 0.1rem solid #992086;
         outline : none;
+      }
+      &::placeholder {
+        color: black;
+        opacity: .6;
       }
     }
     button{
-      background-color : #4d7516;
+      background-color : #992086;
       color : white;
       padding : 1rem 2rem;
       border : none;
-      border-radius : .4rem;
+      border-radius : 2rem;
       pointer : cursor;
-      font-size : 1rem;
+      font-size : .9em;
       text-transform : uppercase;
       transition: .3s ease-in-out;
       font-weight : bold;
       &:hover{
-        background-color : #2a410b;
-        box-shadow : 0 4px 20px 4px  #092a16;
+        background-color : #7d1c6e;
+        box-shadow : 0 0 20px 4px #9920868c;
       }
     }
     span{
-      color : white;
-      text-transform : uppercase;
+      color : black;
     }
     a{
       color : #4e0eff;

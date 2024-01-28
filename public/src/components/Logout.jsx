@@ -7,7 +7,6 @@ function Logout({setDialogue}) {
     const navigate = useNavigate();
     const handleClick = () =>{
         setDialogue(true);
-        
     }
   return (
     <Button onClick = {handleClick}>

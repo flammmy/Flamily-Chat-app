@@ -5,8 +5,7 @@ import axios from "axios";
 import { sendMessagesRoute, getAllMessagesRoute } from "../utils/APIRoutes";
 import {v4 as uuidv4} from "uuid";
 
-function ChatContainer({ currentChat, currentUser, socket}) {
-  const [messages, setMessages] = useState([]);
+function ChatContainer({ currentChat, currentUser, socket,messages,setMessages}) {
   const [arrivalMessage,setArrivalMessage] = useState(null);
   const scrollRef = useRef();
   useEffect(() => {
@@ -102,12 +101,15 @@ const Container = styled.div`
   grid-template-rows : 10% 78% 12%;
   gap : .1rem;  
   overflow : hidden;
+  background: linear-gradient(267deg, rgb(165 60 148) 0%, rgb(155 70 141 / 99%) 81%);
+
   @media screen and (min-width : 720px) and (max-width : 1080px){
     grid-template-rows : 15% 65% 20%;
   }
   .chat-header {
     display: flex;
-    background-color : #0d180e;
+    // background-color : #0d180e;
+    border: 1px solid #ffffffa1;
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
@@ -161,13 +163,15 @@ const Container = styled.div`
     .sended{
       justify-content : flex-end;
       .content{
-        background-color : #29595a47;
+        background-color: #7f207de8;
+        border: 1px solid #ffffffa1;
       }
     }
     .received{
       justify-content : flex-start;
       .content{
-        background-color :  #29595a47;
+        background-color: #7f207de8;
+        border: 1px solid #ffffffa1;
       }
     }
   }
