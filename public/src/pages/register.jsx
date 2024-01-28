@@ -150,7 +150,7 @@ const FormContainer = styled.div`
       padding : 1rem;
       border : none;
       border-radius : 2rem;
-      color : white;
+      color : black;
       width : 100%;
       font-size : 1rem;
       box-shadow : 0 0 9px 1px #00000024;

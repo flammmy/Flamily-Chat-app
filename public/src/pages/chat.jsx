@@ -152,8 +152,11 @@ const Container = styled.div`
   justify-content: center;
   gap: 1rem;
   align-items: center;
-  background: linear-gradient(267deg, rgb(165 60 148) 0%, rgb(155 70 141 / 99%) 81%);
-
+  background: linear-gradient(
+    90deg,
+    rgba(191, 40, 167, 1) 0%,
+    rgb(161 74 146 / 99%) 81%
+  );
   .menuBtn {
     position: absolute;
     right: 1.2rem;

@@ -61,7 +61,6 @@ const Container = styled.div`
     .emoji {
       position: relative;
       @media screen and (max-width : 420px){
-        position : absolute;
         left : 0;
       }
       svg {
