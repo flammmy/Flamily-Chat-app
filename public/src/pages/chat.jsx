@@ -175,7 +175,7 @@ const Container = styled.div`
     background: #00000071;
     display: grid;
     @media screen and (max-width: 600px) {
-      height: 90vh;
+      height: 100vh;
       width: 100vw;
       border-radius: 0;
     }
